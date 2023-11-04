@@ -35,16 +35,17 @@ export type Scalars = {
 
 export type AcceptCareRequestInput = {
   carerName: Scalars['String']['input'];
-  remarks?: InputMaybe<Scalars['String']['input']>;
+  carerRemarks?: InputMaybe<Scalars['String']['input']>;
   requestId: Scalars['ID']['input'];
 };
 
 export type CareRequest = {
   __typename?: 'CareRequest';
+  carerRemarks?: Maybe<Scalars['String']['output']>;
   clientName: Scalars['String']['output'];
+  clientRemarks?: Maybe<Scalars['String']['output']>;
   end: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  remarks?: Maybe<Scalars['String']['output']>;
   start: Scalars['DateTime']['output'];
   status: Status;
   type: CareType;
@@ -56,8 +57,8 @@ export type CareRequestFilter = {
 
 export type CareRequestInput = {
   clientName: Scalars['String']['input'];
+  clientRemarks?: InputMaybe<Scalars['String']['input']>;
   end: Scalars['DateTime']['input'];
-  remarks?: InputMaybe<Scalars['String']['input']>;
   start: Scalars['DateTime']['input'];
   type: CareType;
 };
@@ -109,6 +110,8 @@ export type AddCareRequestMutation = {
     end: any;
     type: CareType;
     status: Status;
+    carerRemarks?: string | null;
+    clientRemarks?: string | null;
   } | null;
 };
 
@@ -126,6 +129,8 @@ export type AcceptCareRequestMutation = {
     end: any;
     type: CareType;
     status: Status;
+    carerRemarks?: string | null;
+    clientRemarks?: string | null;
   } | null;
 };
 
@@ -137,6 +142,8 @@ export type CareRequestItemFragment = {
   end: any;
   type: CareType;
   status: Status;
+  carerRemarks?: string | null;
+  clientRemarks?: string | null;
 };
 
 export type OpenCareRequestsQueryVariables = Exact<{ [key: string]: never }>;
@@ -151,6 +158,8 @@ export type OpenCareRequestsQuery = {
     end: any;
     type: CareType;
     status: Status;
+    carerRemarks?: string | null;
+    clientRemarks?: string | null;
   } | null> | null;
 };
 
@@ -293,10 +302,19 @@ export type CareRequestResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['CareRequest'] = ResolversParentTypes['CareRequest']
 > = {
+  carerRemarks?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   clientName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  clientRemarks?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   end?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  remarks?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   start?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['Status'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['CareType'], ParentType, ContextType>;

@@ -5,8 +5,8 @@ import {
   useAcceptCareRequestMutation
 } from "@zorg-match/graphql-codegen-react";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { Loader } from './loader';
-import DefaultError from "./default-error";
+import { Loader } from '../util/loader';
+import DefaultError from "../util/default-error";
 
 const CareRequestDetails = ({ careRequest, onSubmit }: { careRequest: CareRequest, onSubmit: Function}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
@@ -54,7 +54,7 @@ const CareRequestDetails = ({ careRequest, onSubmit }: { careRequest: CareReques
       </p>
       <p>
         <span className="font-semibold">Remarks:</span>{' '}
-        {careRequest.remarks || 'No remarks'}
+        {careRequest.clientRemarks || 'No remarks'}
       </p>
       <p>
         <span className="font-semibold">Status:</span> {careRequest.status}
@@ -65,7 +65,7 @@ const CareRequestDetails = ({ careRequest, onSubmit }: { careRequest: CareReques
         initialValues={{
           requestId: careRequest.id,
           carerName: '',
-          remarks: '',
+          carerRemarks: '',
         }}
         onSubmit={submitForm}
       >
@@ -114,19 +114,19 @@ const CareRequestDetails = ({ careRequest, onSubmit }: { careRequest: CareReques
 
           <div className="mb-4">
             <label
-              htmlFor="remarks"
+              htmlFor="carerRemarks"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
               Remarks
             </label>
             <Field
               as="textarea"
-              id="remarks"
-              name="remarks"
+              id="carerRemarks"
+              name="carerRemarks"
               className="w-full px-3 py-2 border rounded-md"
             />
             <ErrorMessage
-              name="remarks"
+              name="carerRemarks"
               component="div"
               className="text-red-500 text-sm"
             />

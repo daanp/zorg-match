@@ -16,7 +16,8 @@ type CareRequest {
     start: DateTime!
     end: DateTime!
     clientName: String!
-    remarks: String
+    carerRemarks: String
+    clientRemarks: String
     status: Status!
 }
 
@@ -34,13 +35,13 @@ input CareRequestInput {
     type: CareType!
     end: DateTime!
     clientName: String!
-    remarks: String
+    clientRemarks: String
 }
 
 input AcceptCareRequestInput {
     requestId: ID!
     carerName: String!
-    remarks: String
+    carerRemarks: String
 }
 
 input CareRequestFilter {

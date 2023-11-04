@@ -7,6 +7,8 @@ fragment CareRequestItem on CareRequest{
     end
     type
     status
+    carerRemarks
+    clientRemarks
 }
 
 query OpenCareRequests {

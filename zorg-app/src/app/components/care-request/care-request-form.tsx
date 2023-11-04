@@ -4,8 +4,8 @@ import {
   CareRequestInput,
   useAddCareRequestMutation,
 } from '@zorg-match/graphql-codegen-react';
-import { Loader } from "./loader";
-import DefaultError from "./default-error";
+import { Loader } from "../util/loader";
+import DefaultError from "../util/default-error";
 
 const CareRequestForm = ({onSubmit}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
@@ -51,7 +51,7 @@ const CareRequestForm = ({onSubmit}) => {
           type: '',
           end: '',
           clientName: '',
-          remarks: '',
+          clientRemarks: '',
         }}
         validate={validateForm}
         onSubmit={submitForm}
@@ -150,19 +150,19 @@ const CareRequestForm = ({onSubmit}) => {
 
           <div className="mb-4">
             <label
-              htmlFor="remarks"
+              htmlFor="clientRemarks"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
               Remarks
             </label>
             <Field
               as="textarea"
-              id="remarks"
-              name="remarks"
+              id="clientRemarks"
+              name="clientRemarks"
               className="w-full px-3 py-2 border rounded-md"
             />
             <ErrorMessage
-              name="remarks"
+              name="clientRemarks"
               component="div"
               className="text-red-500 text-sm"
             />
