@@ -7,7 +7,7 @@ import {
 import { Loader } from "../util/loader";
 import DefaultError from "../util/default-error";
 
-const CareRequestForm = ({onSubmit}) => {
+const RequestForm = ({onSubmit}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
   const [addCareRequestMutation, { data, loading, error }] =
     useAddCareRequestMutation();
@@ -186,4 +186,4 @@ const CareRequestForm = ({onSubmit}) => {
   );
 };
 
-export default CareRequestForm;
+export default RequestForm;

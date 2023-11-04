@@ -1,10 +1,10 @@
 import {
   useOpenCareRequestsQuery,
 } from '@zorg-match/graphql-codegen-react';
-import CareRequestList from './components/care-request/care-request-list';
+import RequestList from './components/care-request/request-list';
 import { Loader } from './components/util/loader';
 import DefaultError from './components/util/default-error';
-import Calendar from "./components/calendar/calendar";
+import Calendar from "./components/care-request/calendar";
 
 const StateContainer = () => {
   const { data, loading, error, refetch } = useOpenCareRequestsQuery();
@@ -20,8 +20,7 @@ const StateContainer = () => {
   if (data?.careRequests?.length) {
     return (
       <div>
-        <Calendar careRequests={data?.careRequests}></Calendar>
-      <CareRequestList careRequests={data?.careRequests} refetch={refetch}></CareRequestList>
+        <RequestList careRequests={data?.careRequests} refetch={refetch}></RequestList>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import { CareRequest } from "@zorg-match/graphql-codegen-react";
 
-const Calendar = ({ careRequests }: { careRequests: CareRequest[] }) => {
+const Calendar = ({ careRequests, select }: { careRequests: CareRequest[]; select: Function }) => {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
@@ -28,10 +28,10 @@ const Calendar = ({ careRequests }: { careRequests: CareRequest[] }) => {
   return (
     <div>
       <div className="flex flex-col">
-        {weeksArray.map((week) => {
-          return <div className="flex flex-row">{
-            week.map((day) => (
-              <div key={day} className="w-full min-h-[150px] p-2 border">
+        {weeksArray.map((week,index) => {
+          return <div key={index} className="flex flex-row">{
+            week.map((day,dayIndex) => (
+              <div key={''+dayIndex + '' +  index} className="w-full min-h-[150px] p-2 border">
                 <div className="font-semibold">{day}</div>
                 <ul>
                   {careRequests
@@ -43,7 +43,7 @@ const Calendar = ({ careRequests }: { careRequests: CareRequest[] }) => {
                       );
                     })
                     .map((request) => (
-                      <li key={request.id}>{request.clientName}</li>
+                      <li onClick={() => select(request)} key={'calreq-'+request.id}>{request.clientName}</li>
                     ))}
                 </ul>
               </div>

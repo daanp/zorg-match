@@ -8,7 +8,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Loader } from '../util/loader';
 import DefaultError from "../util/default-error";
 
-const CareRequestDetails = ({ careRequest, onSubmit }: { careRequest: CareRequest, onSubmit: Function}) => {
+const RequestDetails = ({ careRequest, onSubmit }: { careRequest: CareRequest, onSubmit: Function}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
   const [acceptCareRequestMutation, { data, loading, error }] =
     useAcceptCareRequestMutation();
@@ -150,4 +150,4 @@ const CareRequestDetails = ({ careRequest, onSubmit }: { careRequest: CareReques
   );
 };
 
-export default CareRequestDetails;
+export default RequestDetails;
