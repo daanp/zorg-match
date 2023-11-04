@@ -17,3 +17,7 @@ Definitely a fun challenge.
 There's much to improve still in this, both in terms of code and in terms of visual design.
 Didn't have any time to write tests, unfortunately. Would have started with a cypress test or two for the user stories.
 Thankfully GraphQL, GraphQL codegen and Sequelize really made the backend quite a breeze. Otherwise I would have never been able to do the calendar. A feature I would have added, gievn that I had more time, would be to allow the calendar to switch months.
+
+While writing that, decided to go for it... Op de valreep zeg maar.
+
+Have a great weekend and hope you like it :)
