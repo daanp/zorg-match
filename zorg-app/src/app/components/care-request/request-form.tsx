@@ -7,7 +7,7 @@ import {
 import { Loader } from "../util/loader";
 import DefaultError from "../util/default-error";
 
-const RequestForm = ({onSubmit}) => {
+const RequestForm = ({onSubmit}: {onSubmit: Function}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
   const [addCareRequestMutation, { data, loading, error }] =
     useAddCareRequestMutation();

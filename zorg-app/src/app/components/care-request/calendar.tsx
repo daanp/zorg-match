@@ -1,7 +1,13 @@
-import React from "react";
-import { CareRequest } from "@zorg-match/graphql-codegen-react";
+import React from 'react';
+import { CareRequest } from '@zorg-match/graphql-codegen-react';
 
-const Calendar = ({ careRequests, select }: { careRequests: CareRequest[]; select: Function }) => {
+const Calendar = ({
+  careRequests,
+  select,
+}: {
+  careRequests: CareRequest[];
+  select: Function;
+}) => {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
@@ -25,31 +31,51 @@ const Calendar = ({ careRequests, select }: { careRequests: CareRequest[]; selec
     }
   }
 
+  const formatDateTime= (dateTimeString: string) => {
+    const date = new Date(dateTimeString);
+
+    return new Intl.DateTimeFormat('en-US', { hour:'2-digit', minute: '2-digit' }).format(date);
+  };
+
   return (
     <div>
       <div className="flex flex-col">
-        {weeksArray.map((week,index) => {
-          return <div key={index} className="flex flex-row">{
-            week.map((day,dayIndex) => (
-              <div key={''+dayIndex + '' +  index} className="w-full min-h-[150px] p-2 border">
-                <div className="font-semibold">{day}</div>
-                <ul>
-                  {careRequests
-                    .filter((request) => {
-                      const requestDate = new Date(request.start);
-                      return (
-                        requestDate.getMonth() === currentMonth &&
-                        requestDate.getDate() === day
-                      );
-                    })
-                    .map((request) => (
-                      <li onClick={() => select(request)} key={'calreq-'+request.id}>{request.clientName}</li>
-                    ))}
-                </ul>
-              </div>
-            ))}
-          </div>;
-
+        {weeksArray.map((week, index) => {
+          return (
+            <div key={index} className="flex flex-row">
+              {week.map((day, dayIndex) => (
+                <div
+                  key={'' + dayIndex + '' + index}
+                  className="w-full min-h-[150px] p-2 border"
+                >
+                  <div className="font-semibold">{day}</div>
+                  <ul>
+                    {careRequests
+                      .filter((request) => {
+                        const requestDate = new Date(request.start);
+                        return (
+                          requestDate.getMonth() === currentMonth &&
+                          requestDate.getDate() === day
+                        );
+                      })
+                      .map((request) => (
+                        <li
+                          className="max-w-full bg-blue-500 hover:bg-blue-700 text-white px-1 rounded"
+                          onClick={() => select(request)}
+                          key={'calreq-' + request.id}
+                        >
+                          <div className="flex fles-row">
+                            <div className="truncate max-w-[70px]">{request.clientName}</div>
+                            <div className="flex-grow"></div>
+                            <div className="truncate">{formatDateTime(request.start)}</div>
+                          </div>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          );
         })}
       </div>
     </div>

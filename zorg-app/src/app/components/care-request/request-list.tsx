@@ -15,7 +15,7 @@ const RequestList = ({
 }) => {
 
   const [selectedCareRequest, setSelectedCareRequest] =
-    useState<CareRequest | null>(null);
+    useState<CareRequest>();
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
 
@@ -26,7 +26,7 @@ const RequestList = ({
 
 
   const closeDetailsModal = () => {
-    setSelectedCareRequest(null);
+    setSelectedCareRequest(undefined);
     setIsDetailsModalOpen(false);
     refetch();
   };
@@ -46,7 +46,7 @@ const RequestList = ({
       <Calendar careRequests={careRequests} select={select}></Calendar>
       <Table careRequests={careRequests} select={select}></Table>
 
-      {isDetailsModalOpen && (
+      {isDetailsModalOpen && !!selectedCareRequest && (
         <Modal onClose={closeDetailsModal}>
           <RequestDetails
             careRequest={selectedCareRequest}
