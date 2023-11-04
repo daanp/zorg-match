@@ -1,0 +1,12 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "dependencies": {
+    "@apollo/server": "4.9.5",
+    "@graphql-tools/schema": "10.0.0",
+    "graphql": "16.8.1",
+    "tslib": "2.6.2"
+  },
+  "main": "./main.js",
+  "type": "commonjs"
+}

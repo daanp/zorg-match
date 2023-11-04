@@ -1,0 +1,17 @@
+overwrite: true
+schema: 'api/src/schema.graphql'
+documents:
+  - lib/**/*.ts
+generates:
+  graphql-codegen/src/lib/generated/types/generated.ts:
+    documents: 'graphql-codegen/src/lib/graphql/**/*.graphql'
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-resolvers'
+    config:
+      addExplicitOverride: true
+      avoidOptionals:
+        defaultValue: true
+      apolloAngularImportFrom: '@apollo/client/core'  # Specify the correct import path for Apollo Angular
+

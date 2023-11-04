@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../api/src/resolvers/users-resolver.ts"],
+  "sourcesContent": ["import { User } from \"@zorg-match/graphql-codegen\";\n\ntype UsersResolver = () => User\nexport const usersResolver = () => {\n  return []\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAGO,MAAM,gBAAgB,MAAM;AACjC,SAAO,CAAC;AACV;",
+  "names": []
+}

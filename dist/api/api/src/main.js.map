@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../api/src/main.ts"],
+  "sourcesContent": ["import { ApolloServer } from '@apollo/server';\nimport { startStandaloneServer } from '@apollo/server/standalone';\nimport { readFileSync } from 'fs';\nimport { makeExecutableSchema } from '@graphql-tools/schema';\nimport { ResolverFactory } from \"./resolver-factory\";\n\nconst resolverFactory = new ResolverFactory();\nconst resolvers = resolverFactory.getResolvers();\n\nconst typeDefs = readFileSync('./api/src/schema.graphql', {\n  encoding: 'utf-8',\n});\n\nconst server = new ApolloServer({\n  schema: makeExecutableSchema({ typeDefs, resolvers }),\n});\n\nstartStandaloneServer(server, {\n  listen: { port: 4000 },\n}).then(({ url }) => {\n  console.log(`Server listening at ${url}`);\n});\n"],
+  "mappings": "AAAA,oBAA6B;AAC7B,wBAAsC;AACtC,gBAA6B;AAC7B,oBAAqC;AACrC,8BAAgC;AAEhC,MAAM,kBAAkB,IAAI,wCAAgB;AAC5C,MAAM,YAAY,gBAAgB,aAAa;AAE/C,MAAM,eAAW,wBAAa,4BAA4B;AAAA,EACxD,UAAU;AACZ,CAAC;AAED,MAAM,SAAS,IAAI,2BAAa;AAAA,EAC9B,YAAQ,oCAAqB,EAAE,UAAU,UAAU,CAAC;AACtD,CAAC;AAAA,IAED,yCAAsB,QAAQ;AAAA,EAC5B,QAAQ,EAAE,MAAM,IAAK;AACvB,CAAC,EAAE,KAAK,CAAC,EAAE,IAAI,MAAM;AACnB,UAAQ,IAAI,uBAAuB,GAAG,EAAE;AAC1C,CAAC;",
+  "names": []
+}

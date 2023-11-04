@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../graphql-codegen/src/index.ts"],
+  "sourcesContent": ["export * from './lib/generated/types/generated';\n"],
+  "mappings": ";;;;;;;;;;;;;;AAAA;AAAA;AAAA,wBAAc,4CAAd;",
+  "names": []
+}

@@ -1,21 +1,22 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
+import { readFileSync } from 'fs';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { ResolverFactory } from './resolver-factory';
 
-import express from 'express';
-import * as path from 'path';
+const resolverFactory = new ResolverFactory();
+const resolvers = resolverFactory.getResolvers();
 
-const app = express();
-
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
-
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to api!' });
+const typeDefs = readFileSync('./api/src/schema.graphql', {
+  encoding: 'utf-8',
 });
 
-const port = process.env.PORT || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
+const server = new ApolloServer({
+  schema: makeExecutableSchema({ typeDefs, resolvers }),
 });
-server.on('error', console.error);
+
+startStandaloneServer(server, {
+  listen: { port: 4000 },
+}).then(({ url }) => {
+  console.log(`Server listening at ${url}`);
+});
