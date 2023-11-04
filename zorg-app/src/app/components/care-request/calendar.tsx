@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import { CareRequest } from '@zorg-match/graphql-codegen-react';
 import { formatHourMinutes } from '../util/date-formatters';
 
@@ -10,10 +10,11 @@ const Calendar = ({
   select: Function;
 }) => {
   const currentDate = new Date();
-  const currentMonth = currentDate.getMonth();
+
+  const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
+  const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
 
   function getWeeksArray() {
-    const currentYear = currentDate.getFullYear();
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
     const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
     const daysInMonth = lastDayOfMonth.getDate();
@@ -68,9 +69,34 @@ const Calendar = ({
   ];
   const currentMonthName = months[currentMonth];
 
+  function nextMonth() {
+    if(currentMonth + 1 > 11) {
+      setCurrentMonth(0)
+      setCurrentYear(currentYear+1);
+    } else {
+      setCurrentMonth(currentMonth+1)
+    }
+  }
+
+  function previousMonth() {
+    if (currentMonth - 1 < 0) {
+      setCurrentMonth(11)
+      setCurrentYear(currentYear-1)
+    } else {
+      setCurrentMonth(currentMonth-1)
+    }
+
+  }
+
   return (
     <div>
-      {currentMonthName}
+      {currentYear} {currentMonthName}
+      <button
+        className="mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => previousMonth()}>Previous</button>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => nextMonth()}>Next</button>
       <div className="flex flex-col">
         {weeksArray.map((week, index) => {
           return (
@@ -87,7 +113,8 @@ const Calendar = ({
                         const requestDate = new Date(request.start);
                         return (
                           requestDate.getMonth() === currentMonth &&
-                          requestDate.getDate() === day
+                          requestDate.getDate() === day &&
+                          requestDate.getFullYear() === currentYear
                         );
                       })
                       .map((request) => (
