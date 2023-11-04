@@ -11,30 +11,66 @@ const Calendar = ({
 }) => {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
-  const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-  const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
-  const daysInMonth = lastDayOfMonth.getDate();
 
-  const weeksArray = [];
-  let currentWeek = [];
-  const dayOfWeek = firstDayOfMonth.getDay();
+  function getWeeksArray() {
+    const currentYear = currentDate.getFullYear();
+    const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+    const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
+    const daysInMonth = lastDayOfMonth.getDate();
 
-  for (let i = 0; i < dayOfWeek; i++) {
-    currentWeek.push(null);
-  }
+    const weeksArray = [];
+    let currentWeek = [];
+    const dayOfWeek = firstDayOfMonth.getDay();
 
-  for (let day = 1; day <= daysInMonth; day++) {
-    currentWeek.push(day);
-    if (currentWeek.length === 7) {
-      weeksArray.push([...currentWeek]);
-      currentWeek = [];
+    const previousMonthLastDay = new Date(currentYear, currentMonth, 0);
+    const daysInPreviousMonth = previousMonthLastDay.getDate();
+    for (
+      let day = daysInPreviousMonth - dayOfWeek + 1;
+      day <= daysInPreviousMonth;
+      day++
+    ) {
+      currentWeek.push(day);
     }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      currentWeek.push(day);
+      if (currentWeek.length === 7) {
+        weeksArray.push([...currentWeek]);
+        currentWeek = [];
+      }
+    }
+
+    const nextMonthFirstDay = new Date(currentYear, currentMonth + 1, 1);
+    const nextMonthDayOfWeek = nextMonthFirstDay.getDay();
+    for (let day = 1; day <= 7 - nextMonthDayOfWeek; day++) {
+      currentWeek.push(day);
+    }
+
+    weeksArray.push([...currentWeek]);
+    return weeksArray;
   }
 
+  const weeksArray = getWeeksArray();
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const currentMonthName = months[currentMonth];
 
   return (
     <div>
+      {currentMonthName}
       <div className="flex flex-col">
         {weeksArray.map((week, index) => {
           return (

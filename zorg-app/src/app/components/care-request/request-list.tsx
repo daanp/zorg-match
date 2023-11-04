@@ -44,6 +44,8 @@ const RequestList = ({
         </button>
       </div>
       <Calendar careRequests={careRequests} select={select}></Calendar>
+      <hr
+        className="my-12 h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
       <Table careRequests={careRequests} select={select}></Table>
 
       {isDetailsModalOpen && !!selectedCareRequest && (
@@ -56,6 +58,7 @@ const RequestList = ({
           />
         </Modal>
       )}
+
 
       {isNewModalOpen && (
         <Modal
