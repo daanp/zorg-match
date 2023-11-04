@@ -3,8 +3,8 @@ import { CareRequest } from '@zorg-match/graphql-codegen-react';
 import RequestDetails from './request-details';
 import Modal from '../util/modal';
 import RequestForm from './request-form';
-import Calendar from "./calendar";
-import Table from "./table";
+import Calendar from './calendar';
+import Table from './table';
 
 const RequestList = ({
   careRequests,
@@ -13,9 +13,7 @@ const RequestList = ({
   careRequests: CareRequest[];
   refetch: Function;
 }) => {
-
-  const [selectedCareRequest, setSelectedCareRequest] =
-    useState<CareRequest>();
+  const [selectedCareRequest, setSelectedCareRequest] = useState<CareRequest>();
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
 
@@ -23,7 +21,6 @@ const RequestList = ({
     setSelectedCareRequest(careRequest);
     setIsDetailsModalOpen(true);
   };
-
 
   const closeDetailsModal = () => {
     setSelectedCareRequest(undefined);
@@ -44,8 +41,7 @@ const RequestList = ({
         </button>
       </div>
       <Calendar careRequests={careRequests} select={select}></Calendar>
-      <hr
-        className="my-12 h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
+      <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
       <Table careRequests={careRequests} select={select}></Table>
 
       {isDetailsModalOpen && !!selectedCareRequest && (
@@ -58,7 +54,6 @@ const RequestList = ({
           />
         </Modal>
       )}
-
 
       {isNewModalOpen && (
         <Modal

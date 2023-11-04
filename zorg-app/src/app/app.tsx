@@ -2,14 +2,7 @@
 import { ApolloProvider, InMemoryCache } from '@apollo/react-hooks';
 
 import { ApolloClient } from '@apollo/client';
-import RequestDetails from './components/care-request/request-details';
-import {
-  CareRequest,
-  CareType,
-  Status, useOpenCareRequestsQuery
-} from "@zorg-match/graphql-codegen-react";
-import RequestList from "./components/care-request/request-list";
-import StateContainer from "./state-container";
+import StateContainer from './state-container';
 
 export function App() {
   const client = new ApolloClient({
@@ -17,11 +10,10 @@ export function App() {
     cache: new InMemoryCache(),
   });
 
-
   return (
     <ApolloProvider client={client}>
       {' '}
-      <StateContainer/>
+      <StateContainer />
     </ApolloProvider>
   );
 }

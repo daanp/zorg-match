@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import {
   CareRequestInput,
   useAddCareRequestMutation,
 } from '@zorg-match/graphql-codegen-react';
-import { Loader } from "../util/loader";
-import DefaultError from "../util/default-error";
+import { Loader } from '../util/loader';
+import DefaultError from '../util/default-error';
 
-const RequestForm = ({onSubmit}: {onSubmit: Function}) => {
+const RequestForm = ({ onSubmit }: { onSubmit: Function }) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
   const [addCareRequestMutation, { data, loading, error }] =
     useAddCareRequestMutation();
@@ -41,9 +41,7 @@ const RequestForm = ({onSubmit}: {onSubmit: Function}) => {
   };
   return (
     <div className="p-4">
-      {loading ? (
-        <Loader></Loader>
-      ) : null}
+      {loading ? <Loader></Loader> : null}
 
       <Formik
         initialValues={{
@@ -179,9 +177,7 @@ const RequestForm = ({onSubmit}: {onSubmit: Function}) => {
         </Form>
       </Formik>
 
-      {errorOnSubmit ? (
-        <DefaultError></DefaultError>
-      ) : null}
+      {errorOnSubmit ? <DefaultError></DefaultError> : null}
     </div>
   );
 };

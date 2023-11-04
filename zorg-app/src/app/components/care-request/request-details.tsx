@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import {
   AcceptCareRequestInput,
-  CareRequest, CareRequestInput,
-  useAcceptCareRequestMutation
-} from "@zorg-match/graphql-codegen-react";
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+  CareRequest,
+  useAcceptCareRequestMutation,
+} from '@zorg-match/graphql-codegen-react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Loader } from '../util/loader';
-import DefaultError from "../util/default-error";
-import { formatDate } from "../util/date-formatters";
+import DefaultError from '../util/default-error';
+import { formatDate } from '../util/date-formatters';
 
-const RequestDetails = ({ careRequest, onSubmit }: { careRequest: CareRequest, onSubmit: Function}) => {
+const RequestDetails = ({
+  careRequest,
+  onSubmit,
+}: {
+  careRequest: CareRequest;
+  onSubmit: Function;
+}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
   const [acceptCareRequestMutation, { data, loading, error }] =
     useAcceptCareRequestMutation();
@@ -141,9 +147,7 @@ const RequestDetails = ({ careRequest, onSubmit }: { careRequest: CareRequest, o
         </Form>
       </Formik>
 
-      {errorOnSubmit ? (
-        <DefaultError></DefaultError>
-      ) : null}
+      {errorOnSubmit ? <DefaultError></DefaultError> : null}
     </div>
   );
 };

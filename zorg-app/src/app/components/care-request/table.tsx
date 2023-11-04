@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { CareRequest } from '@zorg-match/graphql-codegen-react';
-import { formatDate } from "../util/date-formatters";
+import { formatDate } from '../util/date-formatters';
 
-const Table = ({ careRequests, select }: { careRequests: CareRequest[]; select: Function }) => {
+const Table = ({
+  careRequests,
+  select,
+}: {
+  careRequests: CareRequest[];
+  select: Function;
+}) => {
   const [selectedRow, setSelectedRow] = useState<number>(-1);
   const handleRowClick = (index: number, careRequest: CareRequest) => {
     setSelectedRow(index);
@@ -31,9 +37,7 @@ const Table = ({ careRequests, select }: { careRequests: CareRequest[]; select: 
             onClick={() => handleRowClick(index, careRequest)}
           >
             <td className="py-2">{careRequest.type}</td>
-            <td className="py-2">
-              {formatDate(careRequest.start)}
-            </td>
+            <td className="py-2">{formatDate(careRequest.start)}</td>
             <td className="py-2">{formatDate(careRequest.end)}</td>
             <td className="py-2">{careRequest.clientName}</td>
             <td className="py-2 truncate">{careRequest.clientRemarks}</td>

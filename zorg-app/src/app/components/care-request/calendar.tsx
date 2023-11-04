@@ -1,6 +1,6 @@
 import React from 'react';
 import { CareRequest } from '@zorg-match/graphql-codegen-react';
-import { formatHourMinutes } from "../util/date-formatters";
+import { formatHourMinutes } from '../util/date-formatters';
 
 const Calendar = ({
   careRequests,
@@ -97,9 +97,13 @@ const Calendar = ({
                           key={'calreq-' + request.id}
                         >
                           <div className="flex flex-row">
-                            <div className="truncate max-w-[70px]">{request.clientName}</div>
+                            <div className="truncate max-w-[70px]">
+                              {request.clientName}
+                            </div>
                             <div className="flex-grow"></div>
-                            <div className="truncate">{formatHourMinutes(request.start)}</div>
+                            <div className="truncate">
+                              {formatHourMinutes(request.start)}
+                            </div>
                           </div>
                         </li>
                       ))}

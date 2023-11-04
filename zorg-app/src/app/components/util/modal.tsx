@@ -1,6 +1,9 @@
-import React, { ReactChildren, ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
-class Modal extends React.Component<{ children: ReactNode; onClose: Function }> {
+class Modal extends React.Component<{
+  children: ReactNode;
+  onClose: Function;
+}> {
   render() {
     let { children, onClose } = this.props;
     return (
