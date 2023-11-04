@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@zorg-match/graphql-codegen": ["graphql-codegen/src/index.ts"]
+      "@zorg-match/graphql-codegen": ["graphql-codegen/src/index.ts"],
+      "@zorg-match/graphql-codegen-react": [
+        "graphql-codegen/src/lib/generated/types/generated-react.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

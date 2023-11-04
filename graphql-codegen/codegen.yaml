@@ -13,5 +13,13 @@ generates:
       addExplicitOverride: true
       avoidOptionals:
         defaultValue: true
-      apolloAngularImportFrom: '@apollo/client/core'  # Specify the correct import path for Apollo Angular
+  graphql-codegen/src/lib/generated/types/generated-react.ts:
+    documents: 'graphql-codegen/src/lib/graphql/**/*.graphql'
+    config:
+      withComponent: false
+      withHOC: false
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
 

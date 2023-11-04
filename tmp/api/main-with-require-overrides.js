@@ -14,6 +14,11 @@ const manifest = [
     exactMatch: 'graphql-codegen/src/index.js',
     pattern: 'graphql-codegen/src/index.ts',
   },
+  {
+    module: '@zorg-match/graphql-codegen-react',
+    exactMatch: 'graphql-codegen/src/lib/generated/types/generated-react.js',
+    pattern: 'graphql-codegen/src/lib/generated/types/generated-react.ts',
+  },
 ];
 
 Module._resolveFilename = function (request, parent) {

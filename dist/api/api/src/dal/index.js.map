@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../api/src/dal/index.ts"],
-  "sourcesContent": ["export * from './model'"],
-  "mappings": ";;;;;;;;;;;;;;AAAA;AAAA;AAAA,wBAAc,oBAAd;",
-  "names": []
-}

@@ -1,0 +1,33 @@
+{
+  "name": "zorg-app-e2e",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "zorg-app-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "zorg-app-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "zorg-app:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "zorg-app:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "zorg-app:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["zorg-app-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "implicitDependencies": ["zorg-app"],
+  "tags": []
+}

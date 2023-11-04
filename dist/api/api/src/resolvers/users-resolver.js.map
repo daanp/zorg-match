@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../api/src/resolvers/users-resolver.ts"],
-  "sourcesContent": ["import { UserItemFragment } from '@zorg-match/graphql-codegen';\nimport { Appointment, User } from \"../dal\";\n\ntype UsersResolver = () => UserItemFragment;\nexport const usersResolver = () => {\n  return User.findAll({include: Appointment});\n};\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AACA,iBAAkC;AAG3B,MAAM,gBAAgB,MAAM;AACjC,SAAO,gBAAK,QAAQ,EAAC,SAAS,uBAAW,CAAC;AAC5C;",
-  "names": []
-}
