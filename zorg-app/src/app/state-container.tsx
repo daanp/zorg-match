@@ -17,7 +17,7 @@ const StateContainer = () => {
     return <DefaultError></DefaultError>;
   }
 
-  if (data?.careRequests?.length) {
+  if (data?.careRequests) {
     return (
       <div>
         <RequestList careRequests={data?.careRequests} refetch={refetch}></RequestList>
@@ -25,7 +25,7 @@ const StateContainer = () => {
     );
   }
 
-  return <div>No requests</div>;
+  return <DefaultError></DefaultError>;
 };
 
 export default StateContainer;
