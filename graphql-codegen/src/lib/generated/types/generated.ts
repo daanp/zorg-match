@@ -108,6 +108,7 @@ export type AddCareRequestMutation = {
     start: any;
     end: any;
     type: CareType;
+    status: Status;
   } | null;
 };
 
@@ -124,6 +125,7 @@ export type AcceptCareRequestMutation = {
     start: any;
     end: any;
     type: CareType;
+    status: Status;
   } | null;
 };
 
@@ -134,6 +136,7 @@ export type CareRequestItemFragment = {
   start: any;
   end: any;
   type: CareType;
+  status: Status;
 };
 
 export type OpenCareRequestsQueryVariables = Exact<{ [key: string]: never }>;
@@ -147,6 +150,7 @@ export type OpenCareRequestsQuery = {
     start: any;
     end: any;
     type: CareType;
+    status: Status;
   } | null> | null;
 };
 

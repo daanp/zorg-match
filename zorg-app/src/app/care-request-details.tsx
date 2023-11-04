@@ -8,7 +8,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Loader } from './loader';
 import DefaultError from "./default-error";
 
-const CareRequestDetails = ({ careRequest }: { careRequest: CareRequest }) => {
+const CareRequestDetails = ({ careRequest, onSubmit }: { careRequest: CareRequest, onSubmit: Function}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
   const [acceptCareRequestMutation, { data, loading, error }] =
     useAcceptCareRequestMutation();
@@ -25,14 +25,14 @@ const CareRequestDetails = ({ careRequest }: { careRequest: CareRequest }) => {
     });
 
     if (data?.acceptCareRequest) {
-      //success
+      onSubmit();
     } else {
       setErrorOnSumbit(true);
     }
   };
 
   return (
-    <div className="p-4 border rounded-lg shadow-md">
+    <div className="p-4">
       <h2 className="text-xl font-semibold mb-4">Care Request Details</h2>
       <p>
         <span className="font-semibold">ID:</span> {careRequest.id}

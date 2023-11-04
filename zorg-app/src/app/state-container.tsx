@@ -6,7 +6,7 @@ import { Loader } from './loader';
 import DefaultError from './default-error';
 
 const StateContainer = () => {
-  const { data, loading, error } = useOpenCareRequestsQuery();
+  const { data, loading, error, refetch } = useOpenCareRequestsQuery();
 
   if (loading) {
     return <Loader></Loader>;
@@ -18,7 +18,7 @@ const StateContainer = () => {
 
   if (data?.careRequests?.length) {
     return (
-      <CareRequestList careRequests={data?.careRequests}></CareRequestList>
+      <CareRequestList careRequests={data?.careRequests} refetch={refetch}></CareRequestList>
     );
   }
 

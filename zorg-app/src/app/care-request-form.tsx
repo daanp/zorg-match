@@ -7,7 +7,7 @@ import {
 import { Loader } from "./loader";
 import DefaultError from "./default-error";
 
-const CareRequestForm = () => {
+const CareRequestForm = ({onSubmit}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
   const [addCareRequestMutation, { data, loading, error }] =
     useAddCareRequestMutation();
@@ -34,7 +34,7 @@ const CareRequestForm = () => {
     });
 
     if (data?.addCareRequest) {
-      //success
+      onSubmit();
     } else {
       setErrorOnSumbit(true);
     }

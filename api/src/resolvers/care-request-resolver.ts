@@ -1,5 +1,5 @@
 import { CareRequest } from '../dal';
 
-export const careRequestResolver = (root, { input }) => {
-  return CareRequest.findAll({ where: { ...input } });
+export const careRequestResolver = (parent, args, contextValue, info) => {
+  return CareRequest.findAll({ where: { ...args.where } });
 };

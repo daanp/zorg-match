@@ -6,6 +6,7 @@ fragment CareRequestItem on CareRequest{
     start
     end
     type
+    status
 }
 
 query OpenCareRequests {
