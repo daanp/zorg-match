@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import {
-  CareRequestInput,
-  useAddCareRequestMutation,
-} from '@zorg-match/graphql-codegen-react';
+  CareRequestInput, CareType,
+  useAddCareRequestMutation
+} from "@zorg-match/graphql-codegen-react";
 import { Loader } from '../util/loader';
 import DefaultError from '../util/default-error';
 
@@ -46,7 +46,7 @@ const RequestForm = ({ onSubmit }: { onSubmit: Function }) => {
       <Formik
         initialValues={{
           start: '',
-          type: '',
+          type: CareType.Household,
           end: '',
           clientName: '',
           clientRemarks: '',

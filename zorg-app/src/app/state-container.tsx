@@ -18,7 +18,7 @@ const StateContainer = () => {
     return (
       <div>
         <RequestList
-          careRequests={data?.careRequests}
+          careRequests={data.careRequests}
           refetch={refetch}
         ></RequestList>
       </div>
