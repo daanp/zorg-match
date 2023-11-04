@@ -1,6 +1,7 @@
-import { User } from '@zorg-match/graphql-codegen';
+import { UserItemFragment } from '@zorg-match/graphql-codegen';
+import { Appointment, User } from '../dal';
 
-type UsersResolver = () => User;
+type UsersResolver = () => UserItemFragment;
 export const usersResolver = () => {
-  return [];
+  return User.findAll({ include: Appointment });
 };

@@ -1,6 +1,15 @@
+scalar DateTime
+
 type User {
-    id: Int!
-    name: String
+    id: ID!
+    username: String!
+    appointments: [Appointment]
+}
+
+type Appointment {
+    id: ID!
+    start: DateTime!
+    end: DateTime!
 }
 
 type Query {
@@ -8,5 +17,5 @@ type Query {
 }
 
 type Mutation {
-    addUser(name: String): User
+    addUser(username: String): User
 }

@@ -2,10 +2,6 @@ var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -14,18 +10,13 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
+var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var users_resolver_exports = {};
-__export(users_resolver_exports, {
-  usersResolver: () => usersResolver
-});
-module.exports = __toCommonJS(users_resolver_exports);
-var import_dal = require("../dal");
-const usersResolver = () => {
-  return import_dal.User.findAll({ include: import_dal.Appointment });
-};
+var dal_exports = {};
+module.exports = __toCommonJS(dal_exports);
+__reExport(dal_exports, require("./model"), module.exports);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  usersResolver
+  ...require("./model")
 });
-//# sourceMappingURL=users-resolver.js.map
+//# sourceMappingURL=index.js.map

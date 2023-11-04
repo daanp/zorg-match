@@ -43,7 +43,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx graphql-codegen --config graphql-codegen/codegen.yaml"
+            "command": "npx graphql-codegen --config graphql-codegen/codegen.yaml --watch"
           }
         ]
       }

@@ -1,5 +1,19 @@
+fragment AppointmentItem on Appointment {
+    id
+    start
+    end
+}
+
+fragment UserItem on User{
+    id
+    username
+    appointments {
+      ...AppointmentItem
+    }
+}
+
 query Users {
     users {
-        name
+        ...UserItem
     }
 }

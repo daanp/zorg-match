@@ -1,4 +1,8 @@
-import { GraphQLResolveInfo } from 'graphql';
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from 'graphql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -26,6 +30,14 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
+  DateTime: { input: any; output: any };
+};
+
+export type Appointment = {
+  __typename?: 'Appointment';
+  end: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  start: Scalars['DateTime']['output'];
 };
 
 export type Mutation = {
@@ -34,7 +46,7 @@ export type Mutation = {
 };
 
 export type MutationAddUserArgs = {
-  name?: InputMaybe<Scalars['String']['input']>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
@@ -44,15 +56,45 @@ export type Query = {
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['Int']['output'];
-  name?: Maybe<Scalars['String']['output']>;
+  appointments?: Maybe<Array<Maybe<Appointment>>>;
+  id: Scalars['ID']['output'];
+  username: Scalars['String']['output'];
+};
+
+export type AppointmentItemFragment = {
+  __typename?: 'Appointment';
+  id: string;
+  start: any;
+  end: any;
+};
+
+export type UserItemFragment = {
+  __typename?: 'User';
+  id: string;
+  username: string;
+  appointments?: Array<{
+    __typename?: 'Appointment';
+    id: string;
+    start: any;
+    end: any;
+  } | null> | null;
 };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UsersQuery = {
   __typename?: 'Query';
-  users?: Array<{ __typename?: 'User'; name?: string | null } | null> | null;
+  users?: Array<{
+    __typename?: 'User';
+    id: string;
+    username: string;
+    appointments?: Array<{
+      __typename?: 'Appointment';
+      id: string;
+      start: any;
+      end: any;
+    } | null> | null;
+  } | null> | null;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -162,8 +204,10 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Appointment: ResolverTypeWrapper<Appointment>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
-  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
+  ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
@@ -172,13 +216,30 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Appointment: Appointment;
   Boolean: Scalars['Boolean']['output'];
-  Int: Scalars['Int']['output'];
+  DateTime: Scalars['DateTime']['output'];
+  ID: Scalars['ID']['output'];
   Mutation: {};
   Query: {};
   String: Scalars['String']['output'];
   User: User;
 };
+
+export type AppointmentResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Appointment'] = ResolversParentTypes['Appointment']
+> = {
+  end?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  start?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export interface DateTimeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+  name: 'DateTime';
+}
 
 export type MutationResolvers<
   ContextType = any,
@@ -207,12 +268,19 @@ export type UserResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
 > = {
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  appointments?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Appointment']>>>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  Appointment?: AppointmentResolvers<ContextType>;
+  DateTime?: GraphQLScalarType;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

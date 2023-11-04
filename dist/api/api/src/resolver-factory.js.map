@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../../api/src/resolver-factory.ts"],
-  "sourcesContent": ["import { usersResolver } from \"./resolvers\";\n\nexport class ResolverFactory {\n  public getResolvers() {\n    return {\n      Query: {\n        users: usersResolver\n      },\n      Mutation: {}\n    };\n  }\n}\n"],
+  "sourcesContent": ["import { usersResolver } from './resolvers';\n\nexport class ResolverFactory {\n  public getResolvers() {\n    return {\n      Query: {\n        users: usersResolver,\n      },\n      Mutation: {},\n    };\n  }\n}\n"],
   "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,uBAA8B;AAEvB,MAAM,gBAAgB;AAAA,EACpB,eAAe;AACpB,WAAO;AAAA,MACL,OAAO;AAAA,QACL,OAAO;AAAA,MACT;AAAA,MACA,UAAU,CAAC;AAAA,IACb;AAAA,EACF;AACF;",
   "names": []
 }
