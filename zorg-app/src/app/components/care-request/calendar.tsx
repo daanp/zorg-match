@@ -1,5 +1,6 @@
 import React from 'react';
 import { CareRequest } from '@zorg-match/graphql-codegen-react';
+import { formatHourMinutes } from "../util/date-formatters";
 
 const Calendar = ({
   careRequests,
@@ -31,11 +32,6 @@ const Calendar = ({
     }
   }
 
-  const formatDateTime= (dateTimeString: string) => {
-    const date = new Date(dateTimeString);
-
-    return new Intl.DateTimeFormat('en-US', { hour:'2-digit', minute: '2-digit' }).format(date);
-  };
 
   return (
     <div>
@@ -60,14 +56,14 @@ const Calendar = ({
                       })
                       .map((request) => (
                         <li
-                          className="max-w-full bg-blue-500 hover:bg-blue-700 text-white px-1 rounded"
+                          className="mb-1 max-w-full bg-blue-500 hover:bg-blue-700 text-white px-1 rounded"
                           onClick={() => select(request)}
                           key={'calreq-' + request.id}
                         >
-                          <div className="flex fles-row">
+                          <div className="flex flex-row">
                             <div className="truncate max-w-[70px]">{request.clientName}</div>
                             <div className="flex-grow"></div>
-                            <div className="truncate">{formatDateTime(request.start)}</div>
+                            <div className="truncate">{formatHourMinutes(request.start)}</div>
                           </div>
                         </li>
                       ))}

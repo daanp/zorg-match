@@ -7,6 +7,7 @@ import {
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Loader } from '../util/loader';
 import DefaultError from "../util/default-error";
+import { formatDate } from "../util/date-formatters";
 
 const RequestDetails = ({ careRequest, onSubmit }: { careRequest: CareRequest, onSubmit: Function}) => {
   const [errorOnSubmit, setErrorOnSumbit] = useState(false);
@@ -35,18 +36,15 @@ const RequestDetails = ({ careRequest, onSubmit }: { careRequest: CareRequest, o
     <div className="p-4">
       <h2 className="text-xl font-semibold mb-4">Care Request Details</h2>
       <p>
-        <span className="font-semibold">ID:</span> {careRequest.id}
-      </p>
-      <p>
         <span className="font-semibold">Type:</span> {careRequest.type}
       </p>
       <p>
         <span className="font-semibold">Start Date and Time:</span>{' '}
-        {careRequest.start}
+        {formatDate(careRequest.start)}
       </p>
       <p>
         <span className="font-semibold">End Date and Time:</span>{' '}
-        {careRequest.end}
+        {formatDate(careRequest.end)}
       </p>
       <p>
         <span className="font-semibold">Client Name:</span>{' '}
