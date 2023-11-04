@@ -2,7 +2,7 @@
 import styles from './app.module.scss';
 import { ApolloProvider, InMemoryCache } from "@apollo/react-hooks";
 
-import NxWelcome from './nx-welcome';
+import Root from './root';
 import { ApolloClient } from "@apollo/client";
 
 export function App() {
@@ -14,7 +14,7 @@ export function App() {
   return (
     <ApolloProvider client={client}>
       {' '}
-      <NxWelcome title="zorg-app" />
+      <Root title="zorg-app" />
     </ApolloProvider>
   );
 }

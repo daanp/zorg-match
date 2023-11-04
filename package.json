@@ -72,7 +72,8 @@
     "vitest": "~0.32.0"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "serve": "npx nx run-many -t serve"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --fix",
