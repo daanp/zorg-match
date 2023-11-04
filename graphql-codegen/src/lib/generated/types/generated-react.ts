@@ -31,144 +31,304 @@ export type Scalars = {
   DateTime: { input: any; output: any };
 };
 
-export type Appointment = {
-  __typename?: 'Appointment';
+export type AcceptCareRequestInput = {
+  carerName: Scalars['String']['input'];
+  remarks?: InputMaybe<Scalars['String']['input']>;
+  requestId: Scalars['ID']['input'];
+};
+
+export type CareRequest = {
+  __typename?: 'CareRequest';
+  clientName: Scalars['String']['output'];
   end: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
+  remarks?: Maybe<Scalars['String']['output']>;
   start: Scalars['DateTime']['output'];
+  status: Status;
+  type: CareType;
 };
+
+export type CareRequestFilter = {
+  status?: InputMaybe<Status>;
+};
+
+export type CareRequestInput = {
+  clientName: Scalars['String']['input'];
+  end: Scalars['DateTime']['input'];
+  remarks?: InputMaybe<Scalars['String']['input']>;
+  start: Scalars['DateTime']['input'];
+  type: CareType;
+};
+
+export enum CareType {
+  Household = 'HOUSEHOLD',
+  Medical = 'MEDICAL',
+}
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addUser?: Maybe<User>;
+  acceptCareRequest?: Maybe<CareRequest>;
+  addCareRequest?: Maybe<CareRequest>;
 };
 
-export type MutationAddUserArgs = {
-  username?: InputMaybe<Scalars['String']['input']>;
+export type MutationAcceptCareRequestArgs = {
+  input?: InputMaybe<AcceptCareRequestInput>;
+};
+
+export type MutationAddCareRequestArgs = {
+  input?: InputMaybe<CareRequestInput>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  users?: Maybe<Array<Maybe<User>>>;
+  careRequests?: Maybe<Array<Maybe<CareRequest>>>;
 };
 
-export type User = {
-  __typename?: 'User';
-  appointments?: Maybe<Array<Maybe<Appointment>>>;
-  id: Scalars['ID']['output'];
-  username: Scalars['String']['output'];
+export type QueryCareRequestsArgs = {
+  where?: InputMaybe<CareRequestFilter>;
 };
 
-export type AppointmentItemFragment = {
-  __typename?: 'Appointment';
-  id: string;
-  start: any;
-  end: any;
-};
+export enum Status {
+  Closed = 'CLOSED',
+  Open = 'OPEN',
+}
 
-export type UserItemFragment = {
-  __typename?: 'User';
-  id: string;
-  username: string;
-  appointments?: Array<{
-    __typename?: 'Appointment';
+export type AddCareRequestMutationVariables = Exact<{
+  addRequestInput: CareRequestInput;
+}>;
+
+export type AddCareRequestMutation = {
+  __typename?: 'Mutation';
+  addCareRequest?: {
+    __typename?: 'CareRequest';
     id: string;
+    clientName: string;
     start: any;
     end: any;
-  } | null> | null;
+    type: CareType;
+  } | null;
 };
 
-export type UsersQueryVariables = Exact<{ [key: string]: never }>;
+export type AcceptCareRequestMutationVariables = Exact<{
+  acceptRequestInput: AcceptCareRequestInput;
+}>;
 
-export type UsersQuery = {
-  __typename?: 'Query';
-  users?: Array<{
-    __typename?: 'User';
+export type AcceptCareRequestMutation = {
+  __typename?: 'Mutation';
+  acceptCareRequest?: {
+    __typename?: 'CareRequest';
     id: string;
-    username: string;
-    appointments?: Array<{
-      __typename?: 'Appointment';
-      id: string;
-      start: any;
-      end: any;
-    } | null> | null;
+    clientName: string;
+    start: any;
+    end: any;
+    type: CareType;
+  } | null;
+};
+
+export type CareRequestItemFragment = {
+  __typename?: 'CareRequest';
+  id: string;
+  clientName: string;
+  start: any;
+  end: any;
+  type: CareType;
+};
+
+export type OpenCareRequestsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type OpenCareRequestsQuery = {
+  __typename?: 'Query';
+  careRequests?: Array<{
+    __typename?: 'CareRequest';
+    id: string;
+    clientName: string;
+    start: any;
+    end: any;
+    type: CareType;
   } | null> | null;
 };
 
-export const AppointmentItemFragmentDoc = gql`
-  fragment AppointmentItem on Appointment {
+export const CareRequestItemFragmentDoc = gql`
+  fragment CareRequestItem on CareRequest {
     id
+    clientName
     start
     end
+    type
   }
 `;
-export const UserItemFragmentDoc = gql`
-  fragment UserItem on User {
-    id
-    username
-    appointments {
-      ...AppointmentItem
+export const AddCareRequestDocument = gql`
+  mutation AddCareRequest($addRequestInput: CareRequestInput!) {
+    addCareRequest(input: $addRequestInput) {
+      ...CareRequestItem
     }
   }
-  ${AppointmentItemFragmentDoc}
+  ${CareRequestItemFragmentDoc}
 `;
-export const UsersDocument = gql`
-  query Users {
-    users {
-      ...UserItem
+export type AddCareRequestMutationFn = Apollo.MutationFunction<
+  AddCareRequestMutation,
+  AddCareRequestMutationVariables
+>;
+
+/**
+ * __useAddCareRequestMutation__
+ *
+ * To run a mutation, you first call `useAddCareRequestMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddCareRequestMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addCareRequestMutation, { data, loading, error }] = useAddCareRequestMutation({
+ *   variables: {
+ *      addRequestInput: // value for 'addRequestInput'
+ *   },
+ * });
+ */
+export function useAddCareRequestMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    AddCareRequestMutation,
+    AddCareRequestMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    AddCareRequestMutation,
+    AddCareRequestMutationVariables
+  >(AddCareRequestDocument, options);
+}
+export type AddCareRequestMutationHookResult = ReturnType<
+  typeof useAddCareRequestMutation
+>;
+export type AddCareRequestMutationResult =
+  Apollo.MutationResult<AddCareRequestMutation>;
+export type AddCareRequestMutationOptions = Apollo.BaseMutationOptions<
+  AddCareRequestMutation,
+  AddCareRequestMutationVariables
+>;
+export const AcceptCareRequestDocument = gql`
+  mutation AcceptCareRequest($acceptRequestInput: AcceptCareRequestInput!) {
+    acceptCareRequest(input: $acceptRequestInput) {
+      ...CareRequestItem
     }
   }
-  ${UserItemFragmentDoc}
+  ${CareRequestItemFragmentDoc}
+`;
+export type AcceptCareRequestMutationFn = Apollo.MutationFunction<
+  AcceptCareRequestMutation,
+  AcceptCareRequestMutationVariables
+>;
+
+/**
+ * __useAcceptCareRequestMutation__
+ *
+ * To run a mutation, you first call `useAcceptCareRequestMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAcceptCareRequestMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [acceptCareRequestMutation, { data, loading, error }] = useAcceptCareRequestMutation({
+ *   variables: {
+ *      acceptRequestInput: // value for 'acceptRequestInput'
+ *   },
+ * });
+ */
+export function useAcceptCareRequestMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    AcceptCareRequestMutation,
+    AcceptCareRequestMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    AcceptCareRequestMutation,
+    AcceptCareRequestMutationVariables
+  >(AcceptCareRequestDocument, options);
+}
+export type AcceptCareRequestMutationHookResult = ReturnType<
+  typeof useAcceptCareRequestMutation
+>;
+export type AcceptCareRequestMutationResult =
+  Apollo.MutationResult<AcceptCareRequestMutation>;
+export type AcceptCareRequestMutationOptions = Apollo.BaseMutationOptions<
+  AcceptCareRequestMutation,
+  AcceptCareRequestMutationVariables
+>;
+export const OpenCareRequestsDocument = gql`
+  query OpenCareRequests {
+    careRequests(where: { status: OPEN }) {
+      ...CareRequestItem
+    }
+  }
+  ${CareRequestItemFragmentDoc}
 `;
 
 /**
- * __useUsersQuery__
+ * __useOpenCareRequestsQuery__
  *
- * To run a query within a React component, call `useUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useOpenCareRequestsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOpenCareRequestsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useUsersQuery({
+ * const { data, loading, error } = useOpenCareRequestsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useUsersQuery(
-  baseOptions?: Apollo.QueryHookOptions<UsersQuery, UsersQueryVariables>
+export function useOpenCareRequestsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    OpenCareRequestsQuery,
+    OpenCareRequestsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<UsersQuery, UsersQueryVariables>(
-    UsersDocument,
+  return Apollo.useQuery<OpenCareRequestsQuery, OpenCareRequestsQueryVariables>(
+    OpenCareRequestsDocument,
     options
   );
 }
-export function useUsersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<UsersQuery, UsersQueryVariables>
+export function useOpenCareRequestsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    OpenCareRequestsQuery,
+    OpenCareRequestsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<UsersQuery, UsersQueryVariables>(
-    UsersDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    OpenCareRequestsQuery,
+    OpenCareRequestsQueryVariables
+  >(OpenCareRequestsDocument, options);
 }
-export function useUsersSuspenseQuery(
-  baseOptions?: Apollo.SuspenseQueryHookOptions<UsersQuery, UsersQueryVariables>
+export function useOpenCareRequestsSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    OpenCareRequestsQuery,
+    OpenCareRequestsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useSuspenseQuery<UsersQuery, UsersQueryVariables>(
-    UsersDocument,
-    options
-  );
+  return Apollo.useSuspenseQuery<
+    OpenCareRequestsQuery,
+    OpenCareRequestsQueryVariables
+  >(OpenCareRequestsDocument, options);
 }
-export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
-export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
-export type UsersSuspenseQueryHookResult = ReturnType<
-  typeof useUsersSuspenseQuery
+export type OpenCareRequestsQueryHookResult = ReturnType<
+  typeof useOpenCareRequestsQuery
 >;
-export type UsersQueryResult = Apollo.QueryResult<
-  UsersQuery,
-  UsersQueryVariables
+export type OpenCareRequestsLazyQueryHookResult = ReturnType<
+  typeof useOpenCareRequestsLazyQuery
+>;
+export type OpenCareRequestsSuspenseQueryHookResult = ReturnType<
+  typeof useOpenCareRequestsSuspenseQuery
+>;
+export type OpenCareRequestsQueryResult = Apollo.QueryResult<
+  OpenCareRequestsQuery,
+  OpenCareRequestsQueryVariables
 >;

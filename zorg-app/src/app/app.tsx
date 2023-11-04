@@ -1,9 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
-import { ApolloProvider, InMemoryCache } from "@apollo/react-hooks";
+import { ApolloProvider, InMemoryCache } from '@apollo/react-hooks';
 
-import Root from './root';
-import { ApolloClient } from "@apollo/client";
+import { ApolloClient } from '@apollo/client';
+import CareRequestDetails from './care-request-details';
+import {
+  CareRequest,
+  CareType,
+  Status, useOpenCareRequestsQuery
+} from "@zorg-match/graphql-codegen-react";
+import CareRequestList from "./care-request-list";
+import StateContainer from "./state-container";
 
 export function App() {
   const client = new ApolloClient({
@@ -11,10 +17,11 @@ export function App() {
     cache: new InMemoryCache(),
   });
 
+
   return (
     <ApolloProvider client={client}>
       {' '}
-      <Root title="zorg-app" />
+      <StateContainer/>
     </ApolloProvider>
   );
 }

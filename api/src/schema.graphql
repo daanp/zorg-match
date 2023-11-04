@@ -1,21 +1,48 @@
 scalar DateTime
 
-type User {
-    id: ID!
-    username: String!
-    appointments: [Appointment]
+enum Status {
+    OPEN
+    CLOSED
 }
 
-type Appointment {
+enum CareType {
+    HOUSEHOLD
+    MEDICAL
+}
+
+type CareRequest {
     id: ID!
+    type: CareType!
     start: DateTime!
     end: DateTime!
+    clientName: String!
+    remarks: String
+    status: Status!
 }
 
 type Query {
-    users: [User]
+    careRequests(where: CareRequestFilter): [CareRequest]
 }
 
 type Mutation {
-    addUser(username: String): User
+    addCareRequest(input: CareRequestInput): CareRequest
+    acceptCareRequest(input: AcceptCareRequestInput): CareRequest
+}
+
+input CareRequestInput {
+    start: DateTime!
+    type: CareType!
+    end: DateTime!
+    clientName: String!
+    remarks: String
+}
+
+input AcceptCareRequestInput {
+    requestId: ID!
+    carerName: String!
+    remarks: String
+}
+
+input CareRequestFilter {
+    status: Status
 }

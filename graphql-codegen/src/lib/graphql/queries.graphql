@@ -1,19 +1,15 @@
-fragment AppointmentItem on Appointment {
+
+
+fragment CareRequestItem on CareRequest{
     id
+    clientName
     start
     end
+    type
 }
 
-fragment UserItem on User{
-    id
-    username
-    appointments {
-      ...AppointmentItem
-    }
-}
-
-query Users {
-    users {
-        ...UserItem
+query OpenCareRequests {
+    careRequests(where: {status: OPEN}) {
+        ...CareRequestItem
     }
 }

@@ -1,12 +1,16 @@
-import { usersResolver } from './resolvers';
+import { addCareRequestResolver, careRequestResolver } from './resolvers';
+import { acceptCareRequestResolver } from './resolvers/accept-care-request-resolver';
 
 export class ResolverFactory {
   public getResolvers() {
     return {
       Query: {
-        users: usersResolver,
+        careRequests: careRequestResolver,
       },
-      Mutation: {},
+      Mutation: {
+        addCareRequest: addCareRequestResolver,
+        acceptCareRequest: acceptCareRequestResolver,
+      },
     };
   }
 }

@@ -1,0 +1,11 @@
+mutation AddCareRequest($addRequestInput: CareRequestInput!) {
+    addCareRequest(input: $addRequestInput) {
+        ...CareRequestItem
+    }
+}
+
+mutation AcceptCareRequest($acceptRequestInput: AcceptCareRequestInput!) {
+    acceptCareRequest(input: $acceptRequestInput) {
+        ...CareRequestItem
+    }
+}

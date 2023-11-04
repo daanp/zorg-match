@@ -33,67 +33,120 @@ export type Scalars = {
   DateTime: { input: any; output: any };
 };
 
-export type Appointment = {
-  __typename?: 'Appointment';
+export type AcceptCareRequestInput = {
+  carerName: Scalars['String']['input'];
+  remarks?: InputMaybe<Scalars['String']['input']>;
+  requestId: Scalars['ID']['input'];
+};
+
+export type CareRequest = {
+  __typename?: 'CareRequest';
+  clientName: Scalars['String']['output'];
   end: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
+  remarks?: Maybe<Scalars['String']['output']>;
   start: Scalars['DateTime']['output'];
+  status: Status;
+  type: CareType;
 };
+
+export type CareRequestFilter = {
+  status?: InputMaybe<Status>;
+};
+
+export type CareRequestInput = {
+  clientName: Scalars['String']['input'];
+  end: Scalars['DateTime']['input'];
+  remarks?: InputMaybe<Scalars['String']['input']>;
+  start: Scalars['DateTime']['input'];
+  type: CareType;
+};
+
+export enum CareType {
+  Household = 'HOUSEHOLD',
+  Medical = 'MEDICAL',
+}
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addUser?: Maybe<User>;
+  acceptCareRequest?: Maybe<CareRequest>;
+  addCareRequest?: Maybe<CareRequest>;
 };
 
-export type MutationAddUserArgs = {
-  username?: InputMaybe<Scalars['String']['input']>;
+export type MutationAcceptCareRequestArgs = {
+  input?: InputMaybe<AcceptCareRequestInput>;
+};
+
+export type MutationAddCareRequestArgs = {
+  input?: InputMaybe<CareRequestInput>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  users?: Maybe<Array<Maybe<User>>>;
+  careRequests?: Maybe<Array<Maybe<CareRequest>>>;
 };
 
-export type User = {
-  __typename?: 'User';
-  appointments?: Maybe<Array<Maybe<Appointment>>>;
-  id: Scalars['ID']['output'];
-  username: Scalars['String']['output'];
+export type QueryCareRequestsArgs = {
+  where?: InputMaybe<CareRequestFilter>;
 };
 
-export type AppointmentItemFragment = {
-  __typename?: 'Appointment';
-  id: string;
-  start: any;
-  end: any;
-};
+export enum Status {
+  Closed = 'CLOSED',
+  Open = 'OPEN',
+}
 
-export type UserItemFragment = {
-  __typename?: 'User';
-  id: string;
-  username: string;
-  appointments?: Array<{
-    __typename?: 'Appointment';
+export type AddCareRequestMutationVariables = Exact<{
+  addRequestInput: CareRequestInput;
+}>;
+
+export type AddCareRequestMutation = {
+  __typename?: 'Mutation';
+  addCareRequest?: {
+    __typename?: 'CareRequest';
     id: string;
+    clientName: string;
     start: any;
     end: any;
-  } | null> | null;
+    type: CareType;
+  } | null;
 };
 
-export type UsersQueryVariables = Exact<{ [key: string]: never }>;
+export type AcceptCareRequestMutationVariables = Exact<{
+  acceptRequestInput: AcceptCareRequestInput;
+}>;
 
-export type UsersQuery = {
-  __typename?: 'Query';
-  users?: Array<{
-    __typename?: 'User';
+export type AcceptCareRequestMutation = {
+  __typename?: 'Mutation';
+  acceptCareRequest?: {
+    __typename?: 'CareRequest';
     id: string;
-    username: string;
-    appointments?: Array<{
-      __typename?: 'Appointment';
-      id: string;
-      start: any;
-      end: any;
-    } | null> | null;
+    clientName: string;
+    start: any;
+    end: any;
+    type: CareType;
+  } | null;
+};
+
+export type CareRequestItemFragment = {
+  __typename?: 'CareRequest';
+  id: string;
+  clientName: string;
+  start: any;
+  end: any;
+  type: CareType;
+};
+
+export type OpenCareRequestsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type OpenCareRequestsQuery = {
+  __typename?: 'Query';
+  careRequests?: Array<{
+    __typename?: 'CareRequest';
+    id: string;
+    clientName: string;
+    start: any;
+    end: any;
+    type: CareType;
   } | null> | null;
 };
 
@@ -204,35 +257,45 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Appointment: ResolverTypeWrapper<Appointment>;
+  AcceptCareRequestInput: AcceptCareRequestInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  CareRequest: ResolverTypeWrapper<CareRequest>;
+  CareRequestFilter: CareRequestFilter;
+  CareRequestInput: CareRequestInput;
+  CareType: CareType;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  Status: Status;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
-  User: ResolverTypeWrapper<User>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Appointment: Appointment;
+  AcceptCareRequestInput: AcceptCareRequestInput;
   Boolean: Scalars['Boolean']['output'];
+  CareRequest: CareRequest;
+  CareRequestFilter: CareRequestFilter;
+  CareRequestInput: CareRequestInput;
   DateTime: Scalars['DateTime']['output'];
   ID: Scalars['ID']['output'];
   Mutation: {};
   Query: {};
   String: Scalars['String']['output'];
-  User: User;
 };
 
-export type AppointmentResolvers<
+export type CareRequestResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Appointment'] = ResolversParentTypes['Appointment']
+  ParentType extends ResolversParentTypes['CareRequest'] = ResolversParentTypes['CareRequest']
 > = {
+  clientName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   end?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  remarks?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   start?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['Status'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['CareType'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -245,11 +308,17 @@ export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
 > = {
-  addUser?: Resolver<
-    Maybe<ResolversTypes['User']>,
+  acceptCareRequest?: Resolver<
+    Maybe<ResolversTypes['CareRequest']>,
     ParentType,
     ContextType,
-    Partial<MutationAddUserArgs>
+    Partial<MutationAcceptCareRequestArgs>
+  >;
+  addCareRequest?: Resolver<
+    Maybe<ResolversTypes['CareRequest']>,
+    ParentType,
+    ContextType,
+    Partial<MutationAddCareRequestArgs>
   >;
 };
 
@@ -257,31 +326,17 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
-  users?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['User']>>>,
+  careRequests?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['CareRequest']>>>,
     ParentType,
-    ContextType
+    ContextType,
+    Partial<QueryCareRequestsArgs>
   >;
-};
-
-export type UserResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
-> = {
-  appointments?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Appointment']>>>,
-    ParentType,
-    ContextType
-  >;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
-  Appointment?: AppointmentResolvers<ContextType>;
+  CareRequest?: CareRequestResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  User?: UserResolvers<ContextType>;
 };
