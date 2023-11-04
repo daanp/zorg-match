@@ -82,8 +82,8 @@ CareRequest.init(
   });
 
   await CareRequest.create({
-    start: Date.parse('01 Jan 2020 00:00:00 GMT'),
-    end: Date.parse('02 Jan 2020 00:00:00 GMT'),
+    start: Date.parse('15 Nov 2023 00:00:00 GMT'),
+    end: Date.parse('15 Nov 2023 00:00:11 GMT'),
     clientName: 'Bob',
     clientRemarks: 'Need care',
     type: 'HOUSEHOLD',
@@ -92,13 +92,13 @@ CareRequest.init(
   });
 
   await CareRequest.create({
-    start: Date.parse('01 Jan 2020 00:00:00 GMT'),
-    end: Date.parse('02 Jan 2020 00:00:00 GMT'),
+    start: Date.parse('03 Nov 2023 00:00:00 GMT'),
+    end: Date.parse('03 Nov 2023 00:00:11 GMT'),
     clientName: 'John',
     carerName: 'Alice',
     clientRemarks: 'Need care',
     type: 'MEDICAL',
-    status: 'CLOSED',
+    status: 'OPEN',
     id: uuid(),
   });
 })();
